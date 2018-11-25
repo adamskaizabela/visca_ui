@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sterowanie kamerą Visca Web Interface </title>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    <input type="number" title="panSpeed" min="1" max="10" id="panSpeed" value="1">
+    <input type="number" title="tiltSpeed" min="1" max="10" id="tiltSpeed" value="1">
+    <div>
+        <button id="up">Up</button>
+    </div>
+    <div>
+        <button id="down">Down</button>
+    </div>
+    <div>
+        <button id="left">Left</button>
+    </div>
+    <div>
+        <button id="right">Right</button>
+    </div>
+    <script>
+        $('#up').on('click', () => {
+            fetch('http://localhost:8080/broadcast/pantilt/up', {
+                method: 'POST',
+                body: JSON.stringify({
+                    panSpeed: parseInt($('#panSpeed').val()),
+                    tiltSpeed: 1
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(res => console.log(res.data))
+                .catch(err => console.log(err))
+        });
+    </script>
+</body>
+</html>
