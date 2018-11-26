@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sterowanie kamerą Visca Web Interface </title>
+    <title>Sterowanie kamerą przez interfejs webowy </title>
     <script
         src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
@@ -10,27 +10,45 @@
     </script>
 </head>
 <body>
-    <input type="number" title="panSpeed" min="1" max="10" id="panSpeed" value="1">
-    <input type="number" title="tiltSpeed" min="1" max="10" id="tiltSpeed" value="1">
-    <div>
-        <button id="up">Up</button>
-    </div>
-    <div>
-        <button id="down">Down</button>
-    </div>
-    <div>
-        <button id="left">Left</button>
-    </div>
-    <div>
-        <button id="right">Right</button>
-    </div>
+    <h1> Sterowanie kamerą przez interfejs webowy </h1>
+    <label>Podaj parametr 'panSpeed': </label> <input type="number" title="panSpeed" min="1" max="9" id="panSpeed" value="0"><br/>
+    <label>Podaj parametr 'tiltSpeed': </label> <input type="number" title="tiltSpeed" min="1" max="9" id="tiltSpeed" value="0"><br/>
+
+    <br/>
+    <label> Wybierz kierunek ruchu: </label>
+
+    <br/>
+    <button id="up">Up</button>
+    <button id="down">Down</button>
+    <button id="left">Left</button>
+    <button id="right">Right</button>
+    <br/>
+    <br/>
+    <label> Wybierz rodzaj przybliżenia: </label>
+
+    <br/>
+    <button id="zoomTele"> Zoom Tele </button>
+    <button id="zoomWide"> Zoom Wide </button>
+    <br/>
+    <br/>
+    <button id = "clearAll" >Wyczyść wszystko</button>
+
+
+    <br/>
+    <br/>
+    <label>Odpowiedź systemu:</label>
+    <br/>
+
+    <output id="output"> </output>
+
     <script>
+
         $('#up').on('click', () => {
             fetch('http://localhost:8080/broadcast/pantilt/up', {
                 method: 'POST',
                 body: JSON.stringify({
                     panSpeed: parseInt($('#panSpeed').val()),
-                    tiltSpeed: 1
+                    tiltSpeed: parseInt($('#tiltSpeed').val())
                 }),
                 headers: {
                     "Content-Type": "application/json"
@@ -38,6 +56,98 @@
             }).then(res => console.log(res.data))
                 .catch(err => console.log(err))
         });
+
+        $('#down').on('click', () => {
+            fetch('http://localhost:8080/broadcast/pantilt/down', {
+                method: 'POST',
+                body: JSON.stringify({
+                    panSpeed: parseInt($('#panSpeed').val()),
+                    tiltSpeed: parseInt($('#tiltSpeed').val())
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(res => console.log(res.data))
+                .catch(err => console.log(err))
+        });
+
+
+        $('#left').on('click', () => {
+            fetch('http://localhost:8080/broadcast/pantilt/left', {
+                method: 'POST',
+                body: JSON.stringify({
+                    panSpeed: parseInt($('#panSpeed').val()),
+                    tiltSpeed: parseInt($('#tiltSpeed').val())
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(res => console.log(res.data))
+                .catch(err => console.log(err))
+        });
+
+
+        $('#right').on('click', () => {
+            fetch('http://localhost:8080/broadcast/pantilt/right', {
+                method: 'POST',
+                body: JSON.stringify({
+                    panSpeed: parseInt($('#panSpeed').val()),
+                    tiltSpeed: parseInt($('#tiltSpeed').val())
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(res => console.log(res.data))
+                .catch(err => console.log(err))
+        });
+
+        $('#zoomTele').on('click', () => {
+            fetch('http://localhost:8080/broadcast/zoom/tele', {
+                method: 'POST',
+                body: JSON.stringify({
+                    panSpeed: parseInt($('#panSpeed').val()),
+                    tiltSpeed: parseInt($('#tiltSpeed').val())
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(res => console.log(res.data))
+                .catch(err => console.log(err))
+        });
+
+        $('#zoomWide').on('click', () => {
+            fetch('http://localhost:8080/broadcast/zoom/wide', {
+                method: 'POST',
+                body: JSON.stringify({
+                    panSpeed: parseInt($('#panSpeed').val()),
+                    tiltSpeed: parseInt($('#tiltSpeed').val())
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(res => console.log(res.data))
+                .catch(err => console.log(err))
+        });
+
+
+        $('#clearAll').on('click', () => {
+            fetch('http://localhost:8080/broadcast/misc/clearall', {
+                method: 'POST',
+                body: JSON.stringify({
+                    panSpeed: parseInt($('#panSpeed').val()),
+                    tiltSpeed: parseInt($('#tiltSpeed').val())
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(res => console.log(res.data))
+                .catch(err => console.log(err))
+        });
+
+
+
+
+
     </script>
 </body>
 </html>
